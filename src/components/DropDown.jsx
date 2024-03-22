@@ -1,53 +1,73 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { FaRegTired } from "react-icons/fa";
+
 const DropDown = () => {
-  const { defaultArray } = useSelector((store) => store.dropDown);
+  const { defaultArray, searchedResult } = useSelector(
+    (store) => store.dropDown
+  );
+  const [state, setState] = useState(false);
+  
+  useEffect(() => {
+    if (defaultArray.length < 7) {
+      setState(true);
+    } else {
+      setState(false);
+    }
+  });
+
   return (
     <Wrapper>
-      {defaultArray.length < 1 ? (
-        <div className="notfound-container">
-          <h1>No Item found</h1>
-          {<FaRegTired className="icon"/>}
-        </div>
-      ) : (
-        defaultArray.sort().map((item, index) => {
-          return (
-            <div className={`${index === 0 ? "first-item" : "single-item"}`}>
-              <p>{item}</p>
-            </div>
-          );
-        })
-      )}
+      <div className={`container ${state?'flexible-con':null}`}>
+        {defaultArray.length < 1 ? (
+          <div className="notfound-container">
+            <h1>No Item found</h1>
+            {<FaRegTired className="icon" />}
+          </div>
+        ) : (
+          defaultArray.map((item, index) => {
+            return (
+              <div
+                key={index}
+                className={`${index === 0 ? "first-item" : "single-item"}`}
+              >
+                <p>{item}</p>
+              </div>
+            );
+          })
+        )}
+      </div>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  background-color: #e0dede;
-  backdrop-filter: blur(20px);
-  width: 500px;
-  border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
-  margin: 2px auto;
-  height: 400px;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  padding: 10px 0px;
-  overflow-y: auto;
-  
-  &::-webkit-scrollbar {
+  .container {
+    background-color: #e0dede;
+    backdrop-filter: blur(20px);
+    width: 500px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    margin: 2px auto;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 10px 0px;
+    overflow-y: scroll;
+  }
+
+  .container::-webkit-scrollbar {
     width: 10px;
   }
 
-  &::-webkit-scrollbar-thumb {
+  .container::-webkit-scrollbar-thumb {
     background-color: #888;
     border-radius: 5px;
   }
 
-  &::-webkit-scrollbar-track {
+  .container::-webkit-scrollbar-track {
     background-color: #f1f1f1;
   }
 
@@ -66,23 +86,28 @@ const Wrapper = styled.div`
     padding: 7.5px 0;
   }
   @media (max-width: 580px) {
-    width: 300px;
+    .container {
+      width: 300px;
+    }
   }
-  .icon{
-    width: 80px;
-    height: 80px;
-    margin-top: 15px;
+  .icon {
+    width: 30px;
+    height: 30px;
+    margin: 15px;
   }
-  h1{
-    font-size: 2.5rem;
+  h1 {
+    font-size: 1.5rem;
   }
-  .notfound-container{
+  .notfound-container {
     height: 100%;
     display: flex;
     justify-content: center;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     align-items: center;
+  }
+  .flexible-con {
+    height: 100%;
   }
 `;
 
