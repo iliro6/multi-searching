@@ -1,16 +1,25 @@
 import React from "react";
 import styled from "styled-components";
-import { data } from "../data";
+import { useSelector } from "react-redux";
+import { FaRegTired } from "react-icons/fa";
 const DropDown = () => {
+  const { defaultArray } = useSelector((store) => store.dropDown);
   return (
     <Wrapper>
-      {data.sort().map((item, index) => {
-        return (
-          <div className={`${index === 0 ? "first-item" : "single-item"}`}>
-            <p>{item}</p>
-          </div>
-        );
-      })}
+      {defaultArray.length < 1 ? (
+        <div className="notfound-container">
+          <h1>No Item found</h1>
+          {<FaRegTired className="icon"/>}
+        </div>
+      ) : (
+        defaultArray.sort().map((item, index) => {
+          return (
+            <div className={`${index === 0 ? "first-item" : "single-item"}`}>
+              <p>{item}</p>
+            </div>
+          );
+        })
+      )}
     </Wrapper>
   );
 };
@@ -28,6 +37,7 @@ const Wrapper = styled.div`
   text-align: center;
   padding: 10px 0px;
   overflow-y: auto;
+  
   &::-webkit-scrollbar {
     width: 10px;
   }
@@ -57,6 +67,22 @@ const Wrapper = styled.div`
   }
   @media (max-width: 580px) {
     width: 300px;
+  }
+  .icon{
+    width: 80px;
+    height: 80px;
+    margin-top: 15px;
+  }
+  h1{
+    font-size: 2.5rem;
+  }
+  .notfound-container{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    align-items: center;
   }
 `;
 
