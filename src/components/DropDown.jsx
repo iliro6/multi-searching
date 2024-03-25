@@ -28,7 +28,10 @@ const DropDown = () => {
         ) : (
           defaultArray.map((item, index) => {
             return (
-              <div key={index} className={"single-item"}>
+              <div
+                key={index}
+                className={`single-item ${index === 0 ? "flexible-con" : null}`}
+              >
                 <p>{item}</p>
               </div>
             );
@@ -40,15 +43,13 @@ const DropDown = () => {
 };
 
 const Wrapper = styled.div`
-
   .container {
     background-color: #e0dede;
     backdrop-filter: blur(20px);
     width: 500px;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-    margin: 2px auto;
+    margin: 5px auto;
     height: 380px;
+    max-height: 380px;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -56,6 +57,7 @@ const Wrapper = styled.div`
     overflow-y: scroll;
     /* transition: all 0.5s; */
     overflow-x: auto;
+    border-radius: 5px;
   }
 
   .container::-webkit-scrollbar {
@@ -87,12 +89,10 @@ const Wrapper = styled.div`
   .single-item:hover {
     background-color: #bfbfbf;
   }
-
-  @media (max-width: 580px) {
-    .container {
-      width: 300px;
-    }
+  .flexible-con {
+    border-top: none;
   }
+
   .icon {
     width: 30px;
     height: 30px;
@@ -111,12 +111,40 @@ const Wrapper = styled.div`
   }
   .flexible-con {
     height: 100%;
-    max-height: 380px;
-   
   }
   p {
     font-weight: 500;
     letter-spacing: 2px;
+  }
+
+  @media (max-width: 580px) {
+    .container {
+      width: 90%;
+      margin-top: 5px;
+      border-radius: 5px;
+      font-size: 0.75rem;
+    }
+    .single-item {
+      padding: 14px;
+    }
+    .notfound-container h1 {
+      font-size: 1rem;
+    }
+    .icon {
+      width: 20px;
+      height: 20px;
+      margin-left: 5px;
+    }
+  }
+  @media (max-height: 564px) {
+    .container {
+      height: 252px;
+      max-height: 252px;
+    }
+    .flexible-con {
+      height: 100%;
+      max-height: 252px;
+    }
   }
 `;
 

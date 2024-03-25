@@ -1,5 +1,5 @@
 import React from "react";
-export const data = [
+const rawData = [
   // Programming Languages
   "JavaScript",
   "Python",
@@ -59,5 +59,6 @@ export const data = [
   // Add more as needed
 ];
 
+export const data = rawData.sort();
 
 
