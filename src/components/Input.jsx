@@ -56,6 +56,7 @@ const Wrapper = styled.div`
     .search {
       transform: translateX(130px);
     }
+    margin-top: 100px;
   }
 `;
 

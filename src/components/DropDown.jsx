@@ -28,10 +28,7 @@ const DropDown = () => {
         ) : (
           defaultArray.map((item, index) => {
             return (
-              <div
-                key={index}
-                className={ "single-item"}
-              >
+              <div key={index} className={"single-item"}>
                 <p>{item}</p>
               </div>
             );
@@ -43,6 +40,7 @@ const DropDown = () => {
 };
 
 const Wrapper = styled.div`
+
   .container {
     background-color: #e0dede;
     backdrop-filter: blur(20px);
@@ -56,6 +54,8 @@ const Wrapper = styled.div`
     text-align: center;
     padding: 0px 0px;
     overflow-y: scroll;
+    /* transition: all 0.5s; */
+    overflow-x: auto;
   }
 
   .container::-webkit-scrollbar {
@@ -80,14 +80,14 @@ const Wrapper = styled.div`
     align-items: center;
     /* margin: 12px 0; */
     border-top: 1px solid #b4b4b4;
-    padding: 20px;
+    padding: 22px;
     cursor: pointer;
     transition: all 1s;
   }
   .single-item:hover {
     background-color: #bfbfbf;
   }
-  
+
   @media (max-width: 580px) {
     .container {
       width: 300px;
@@ -111,6 +111,8 @@ const Wrapper = styled.div`
   }
   .flexible-con {
     height: 100%;
+    max-height: 380px;
+   
   }
   p {
     font-weight: 500;
