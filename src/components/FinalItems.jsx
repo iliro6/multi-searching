@@ -1,12 +1,19 @@
 import React from "react";
 import styled from "styled-components";
-
+import { useDispatch } from "react-redux";
+import { removeItem } from "../feature/Drop-down/ddSlice";
 const FinalItems = ({ item }) => {
+  const dispatch = useDispatch();
   return (
     <Wrapper>
       <div className="single-item">
         <div className="text">{item}</div>
-        <div className="icon"></div>
+        <div
+          onClick={() => {
+            dispatch(removeItem(item));
+          }}
+          className="icon"
+        ></div>
       </div>
     </Wrapper>
   );
@@ -23,10 +30,11 @@ const Wrapper = styled.div`
     background-color: #cdcaca;
     color: #676666;
     position: relative;
+   
   }
 
   .icon {
-    background-color: #c84747;
+    background-color: #ff2b2b;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     height: 100%;
@@ -34,6 +42,10 @@ const Wrapper = styled.div`
     position: absolute;
     right: 0;
     top: 0;
+    transition: all 500ms;
+  }
+  .icon:hover {
+    background-color: #c12525;
   }
   .text {
     padding-right: 15px;
@@ -52,9 +64,9 @@ const Wrapper = styled.div`
       position: relative;
     }
   }
-  @media (max-width:307px) {
-    .single-item{
-        font-size: 0.3rem;
+  @media (max-width: 307px) {
+    .single-item {
+      font-size: 0.3rem;
     }
   }
 `;

@@ -23,21 +23,22 @@ const ddSlice = createSlice({
           .toLowerCase()
           .startsWith(state.searchedResult.toLowerCase());
       });
-      
     },
     addItem: (state, action) => {
-     if(state.finalItems.includes(action.payload)){
-      null
-     }
-     else if (state.finalItems.length >=8){
-      null
-     }
-     else{
-      state.finalItems.push(action.payload);
-     }
+      if (state.finalItems.includes(action.payload)) {
+        null;
+      } else if (state.finalItems.length >= 8) {
+        null;
+      } else {
+        state.finalItems.push(action.payload);
+      }
+    },
+    removeItem: (state, action) => {
+      
+      state.finalItems = state.finalItems.filter((item) => item !== action.payload);
     },
   },
 });
 
 export default ddSlice.reducer;
-export const { getInputValue, searchForResult, addItem } = ddSlice.actions;
+export const { getInputValue, searchForResult, addItem,removeItem } = ddSlice.actions;
