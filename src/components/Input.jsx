@@ -18,7 +18,6 @@ const Input = () => {
         type="text"
         placeholder="Search here"
       />
-
       <CiSearch className="search" />
     </Wrapper>
   );
@@ -28,7 +27,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 200px;
+  margin-top: 130px;
   input {
     background: none;
     width: 500px;

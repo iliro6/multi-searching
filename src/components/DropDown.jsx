@@ -2,11 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { useSelector, useDispatch } from "react-redux";
 import { FaRegTired } from "react-icons/fa";
+import { addItem } from "../feature/Drop-down/ddSlice";
 
 const DropDown = () => {
   const { defaultArray, searchedResult } = useSelector(
     (store) => store.dropDown
   );
+  const dispatch  = useDispatch();
   const [state, setState] = useState(false);
 
   useEffect(() => {
@@ -30,6 +32,7 @@ const DropDown = () => {
             return (
               <div
                 key={index}
+                onClick={()=>{dispatch(addItem(item))}}
                 className={`single-item ${index === 0 ? "flexible-con" : null}`}
               >
                 <p>{item}</p>

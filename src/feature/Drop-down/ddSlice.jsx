@@ -3,6 +3,7 @@ import { data } from "../../data";
 const initialState = {
   searchedResult: "",
   defaultArray: data,
+  finalItems: [],
 };
 
 const ddSlice = createSlice({
@@ -13,7 +14,7 @@ const ddSlice = createSlice({
       state.searchedResult = action.payload;
     },
     searchForResult: (state, action) => {
-      if(state.searchedResult===""){
+      if (state.searchedResult === "") {
         state.defaultArray = data;
       }
       state.defaultArray = state.defaultArray.filter((item) => {
@@ -22,10 +23,21 @@ const ddSlice = createSlice({
           .toLowerCase()
           .startsWith(state.searchedResult.toLowerCase());
       });
-      console.log(data);
+      
+    },
+    addItem: (state, action) => {
+     if(state.finalItems.includes(action.payload)){
+      null
+     }
+     else if (state.finalItems.length >=8){
+      null
+     }
+     else{
+      state.finalItems.push(action.payload);
+     }
     },
   },
 });
 
 export default ddSlice.reducer;
-export const { getInputValue, searchForResult } = ddSlice.actions;
+export const { getInputValue, searchForResult, addItem } = ddSlice.actions;
